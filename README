@@ -1,0 +1,15 @@
+Requirements for this application
+
+1) face_recognition
+
+pip install face_recognition
+
+2) dlib
+
+pip install dlib
+
+3) python opencv
+
+sudo apt-get install python-opencv
+
+
