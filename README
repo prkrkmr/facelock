@@ -12,4 +12,23 @@ pip install dlib
 
 sudo apt-get install python-opencv
 
+HOW TO USE
+
+1) chmod +x facelock
+
+Setup
+
+1) ./facelock setup
+
+How to encrypt
+
+1) ./face_lock encrypt <filePath>
+
+Saves the file as filename.enc
+
+How to decrypt
+
+1) ./face_lock decrypt <filePath>
+
+decrypts the file back to filename
 
