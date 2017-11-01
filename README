@@ -1,14 +1,17 @@
 Requirements for this application
+1) boost
 
-1) face_recognition
-
-pip install face_recognition
+sudo apt-get install libboost-python-dev
 
 2) dlib
 
 pip install dlib
 
-3) python opencv
+3) face_recognition
+
+pip install face_recognition
+
+4) python opencv
 
 sudo apt-get install python-opencv
 
