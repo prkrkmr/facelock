@@ -2,10 +2,10 @@ import face_recognition
 import cv2
 from subprocess import Popen
 
-def image_matching():
+def image_matching(temp_image):
     video_capture = cv2.VideoCapture(0)
 
-    image = face_recognition.load_image_file("/tmp/facelock.png")
+    image = face_recognition.load_image_file(temp_image)
     a_face_encoding = face_recognition.face_encodings(image)[0]
 
     face_locations = []

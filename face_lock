@@ -1,41 +1,46 @@
 #!/usr/bin/env python
+import os
+from sys import argv
 from takeImage import imageCapture
 from encode_image import encode_base64
-from sys import argv
 from webCam import image_matching
 from decode_image import decode_base
 from pass_encryption import pass_enc
 from encrypt import encrypt_file
 from decrypt import decrypt_file
-import os
+from os.path import expanduser
+home = expanduser("~")
+
+temp_image = '/tmp/facelock.png'
+face_lock_image = home + '/.facelock/image'
 
 def check_dir():
-    if os.path.exists('/home/'+os.getlogin()+'/.facelock') == False:
-        os.mkdir('/home/'+os.getlogin()+'/.facelock')
+    if os.path.exists(face_lock_image) == False:
+        os.mkdir(face_lock_image)
 
 def file_read():
-    with open('/home/prakhar/.facelock/image','rb') as returnData:
+    with open(face_lock_image, 'rb') as returnData:
         return returnData.read()
 
 def rm_tmp_img():
-    os.remove('/tmp/facelock.png')
+    os.remove(temp_image)
 
 if argv[1] == 'setup':
     check_dir()
-    imageCapture()
-    encode_base64('/tmp/facelock.png') 
+    imageCapture(temp_image)
+    encode_base64(temp_image, face_lock_image) 
     rm_tmp_img()
 
 if argv[1] == 'encrypt':
     check_dir()
-    decode_base()
-    if image_matching() == True:
+    decode_base(temp_image, face_lock_image)
+    if image_matching(temp_image) == True:
         encrypt_file(argv[2], pass_enc(file_read()[500:600]))
     rm_tmp_img()
 
 if argv[1] == 'decrypt':
     check_dir()
-    decode_base()
-    if image_matching() == True:
+    decode_base(temp_image, face_lock_image)
+    if image_matching(temp_image) == True:
         decrypt_file(argv[2], pass_enc(file_read()[500:600]))
     rm_tmp_img()
