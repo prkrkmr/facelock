@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from subprocess import Popen
-import os
+from os import remove
 
 def decrypt_file(file_name, password):
     '''
@@ -11,4 +11,4 @@ def decrypt_file(file_name, password):
                                 '-d', '-aes-256-cbc', '-in',
                                 file_name, '-out', str(file_name).strip('.enc')])
     decryption_process.communicate()
-    os.remove(file_name)
+    remove(file_name)

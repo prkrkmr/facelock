@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 import base64
-import os
 from pass_encryption import pass_enc
 
 def encode_base64(read_image_file, write_image_file):

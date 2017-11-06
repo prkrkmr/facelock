@@ -1,5 +1,8 @@
 #!/usr/bin/env python
-import os
+from os import path
+from os import remove
+from os import mkdir
+from os.path import expanduser
 from sys import argv
 from takeImage import imageCapture
 from encode_image import encode_base64
@@ -8,22 +11,21 @@ from decode_image import decode_base
 from pass_encryption import pass_enc
 from encrypt import encrypt_file
 from decrypt import decrypt_file
-from os.path import expanduser
-home = expanduser("~")
 
+home = expanduser("~")
 temp_image = '/tmp/facelock.png'
 face_lock_image = home + '/.facelock/image'
 
 def check_dir():
-    if os.path.exists(face_lock_image) == False:
-        os.mkdir(face_lock_image)
+    if path.exists(face_lock_image) == False:
+        mkdir(face_lock_image)
 
 def file_read():
     with open(face_lock_image, 'rb') as returnData:
         return returnData.read()
 
 def rm_tmp_img():
-    os.remove(temp_image)
+    remove(temp_image)
 
 if argv[1] == 'setup':
     check_dir()

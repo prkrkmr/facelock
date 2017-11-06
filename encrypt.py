@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import os
+from os import remove
 from subprocess import Popen
 
 def encrypt_file(file_name, password):
@@ -10,4 +10,4 @@ def encrypt_file(file_name, password):
     process_encrypt = Popen(['openssl', 'aes-256-cbc', '-salt', '-in', file_name, '-out',
                              str(file_name)+".enc", '-pass', 'pass:'+str(password)])
     process_encrypt.communicate()
-    os.remove(file_name)
+    remove(file_name)
