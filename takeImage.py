@@ -15,12 +15,16 @@ def imageCapture(write_image_file):
         imageCapture(write_image_file)
     else:
         print "Image Taken"
+        img = cv2.imread(write_image_file)
+        cv2.imshow('FRAME', img)
+        sleep(1)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
 
 def checkImage(write_image_file):
     '''
     Check if the image is clearly available
     '''
-
     try:
         face = face_recognition.face_encodings(face_recognition.load_image_file(write_image_file))[0]
         return True

@@ -7,6 +7,6 @@ def pass_enc(password):
     '''
 
     enc_pass = ''
-    for i in list(password):
-        enc_pass = enc_pass + chr(ord(i)+1)
+    for i in password:
+        enc_pass = enc_pass + str(chr(ord(i)+1))
     return enc_pass

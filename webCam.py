@@ -1,14 +1,23 @@
-from subprocess import Popen
-import face_recognition
+#!/usr/bin/env python
+'''
+This module takes image from the webcam and compares it with
+the image taken during setup.
+'''
 import cv2
+import face_recognition
 
 def image_matching(temp_image):
+    '''
+    Records the image from the camera and process every frame to
+    find a match with the temp image if the image matches then
+    returns true as the value otherwise waits for the q key to
+    exit the video capture.
+    '''
     video_capture = cv2.VideoCapture(0)
     image = face_recognition.load_image_file(temp_image)
-    a_face_encoding = face_recognition.face_encodings(image)[0]
+    temp_face_encoding = face_recognition.face_encodings(image)[0]
     face_locations = []
     face_encodings = []
-    face_names = []
     process_this_frame = True
     while True:
         ret, frame = video_capture.read()
@@ -16,14 +25,11 @@ def image_matching(temp_image):
         if process_this_frame:
             face_locations = face_recognition.face_locations(small_frame)
             face_encodings = face_recognition.face_encodings(small_frame, face_locations)
-            face_names = []
             for face_encoding in face_encodings:
-                match = face_recognition.compare_faces([a_face_encoding], face_encoding,
+                match = face_recognition.compare_faces([temp_face_encoding], face_encoding,
                                                        tolerance = 0.4)
-                name = "Unknown"
                 if match[0]:
                     return True
-                face_names.append(name)
         process_this_frame = not process_this_frame
         cv2.imshow('Video', frame)
         # Hit 'q' on the keyboard to quit!
